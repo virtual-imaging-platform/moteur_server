@@ -26,8 +26,8 @@
 
 #include "soapH.h"
 #include "moteur_service.nsmap"
-#include <iostream.h>
-#include <string.h>
+#include <iostream>
+#include <string>
 #include <wait.h>
 #include <unistd.h>
 #include <fstream>
