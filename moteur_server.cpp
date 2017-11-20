@@ -1,29 +1,3 @@
-/***********************************************
- * file:  moteur_server.cpp
- * date:  ?
- * authors: Tristan (Creatis) glatard@creatis.insa-lyon.fr
- * 			Martin (AMC) m.stam@amc.uva.nl
- *
- * project website:
- *	http://amc-app1.amc.sara.nl/twiki/bin/view/EBioScience/Admin/MoteurServiceDev#MOTEUR_web_service_moteur_server
- *
- * description:
- *  Point of entry for the MOTEUR webservice. This binary:
- *   - starts a new session
- *   - stores a passed certificate to the /tmp directory.
- *   - generates a workflow directory
- *   - Initializes the workflow run structure and config files in the mentioned directory
- *
- * history:
- *  -
- *  - 29 september: Header added.
- *  - 30 september: Fixed bugs and errors in 'getVersion' and SERVER_PORT retrieval function
- *  - 5 October: Merged with moteur code ; added proxy lifetime checking
- *  - March 2011: added the getworkflowstatus for the shiwa project
- * parameters:
- *  -
- **********************************************/
-
 #include "soapH.h"
 #include "moteur_service.nsmap"
 #include <iostream>

@@ -1,5 +1,5 @@
-SERVICE_NAME=moteur
 GSOAP=./gsoap-2.8/install
+SERVICE_NAME=moteur
 
 all: 	stubs ${SERVICE_NAME}_server ${SERVICE_NAME}_client ${SERVICE_NAME}_client-status
 soapServer.o:
