@@ -13,7 +13,7 @@ export LCG_GFAL_INFOSYS=cclcgtopbdii01.in2p3.fr:2170
 export MOTEUR_HOME=${PWD}
 
 # Proxy
-export ROBOT_PROXY=${PATH_TO_PROXY}
+export ROBOT_PROXY=${PATH_TO_PROXY} #replace PATH_TO_PROXY with the real path pointing to your x509up_robot file
 export X509_USER_PROXY=${ROBOT_PROXY} 
 
 # DIRAC
