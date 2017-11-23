@@ -1,4 +1,4 @@
-GSOAP=./gsoap-2.8/install
+GSOAP=../gsoap-2.8/gsoap
 SERVICE_NAME=moteur
 
 all: 	stubs ${SERVICE_NAME}_server ${SERVICE_NAME}_client ${SERVICE_NAME}_client-status
@@ -25,16 +25,16 @@ ${SERVICE_NAME}_client-status.o: soapC.o soapClient.o ${SERVICE_NAME}_client-sta
 
 
 stubs :
-	${GSOAP}/bin/soapcpp2 ${SERVICE_NAME}_service.h			
+	${GSOAP}/bin/soapcpp2 ${SERVICE_NAME}_service.h
 
 ${SERVICE_NAME}_server: ${SERVICE_NAME}_server.o soapServer.o soapC.o
-	g++ -g -lssl -lcrypto  -DWITH_OPENSSL -fPIC -Wno-deprecated -Wall ${SERVICE_NAME}_server.o soapC.o -lgsoapssl++ soapServer.o -L ${GSOAP}/lib -lpthread `xml2-config --libs`  -Wl,-rpath,. -o ${SERVICE_NAME}_server
+	g++ -g -DWITH_OPENSSL -fPIC -Wno-deprecated -Wall ${SERVICE_NAME}_server.o soapC.o soapServer.o -L ${GSOAP}/lib -lgsoapssl++ -lpthread `xml2-config --libs` -lssl -lcrypto -lz -Wl,-rpath,. -o ${SERVICE_NAME}_server
 
 ${SERVICE_NAME}_client-status: ${SERVICE_NAME}_client-status.o soapClient.o soapC.o
-	g++   -g -DWITH_OPENSSL -lssl -lcrypto  -fPIC ${SERVICE_NAME}_client-status.o soapC.o  -lgsoapssl++ -L${GSOAP}/lib soapClient.o -o ${SERVICE_NAME}_client-status
+	g++ -g -DWITH_OPENSSL -fPIC ${SERVICE_NAME}_client-status.o soapC.o -L${GSOAP}/lib -lgsoapssl++ soapClient.o -lssl -lcrypto -lz -o ${SERVICE_NAME}_client-status
 
 ${SERVICE_NAME}_client: ${SERVICE_NAME}_client.o soapClient.o soapC.o
-	g++   -g -DWITH_OPENSSL -lssl -lcrypto  -fPIC ${SERVICE_NAME}_client.o soapC.o soapClient.o -lgsoapssl++ -L${GSOAP}/lib -o ${SERVICE_NAME}_client
+	g++ -g -DWITH_OPENSSL -fPIC ${SERVICE_NAME}_client.o soapC.o soapClient.o -L${GSOAP}/lib -lgsoapssl++ -lssl -lcrypto -lz -o ${SERVICE_NAME}_client
 
 
 install: stubs ${SERVICE_NAME}_server ${SERVICE_NAME}_client
@@ -42,4 +42,3 @@ install: stubs ${SERVICE_NAME}_server ${SERVICE_NAME}_client
 
 clean:
 	/bin/rm -f  ${SERVICE_NAME}_server ${SERVICE_NAME}_client  *.log *.o *~ soap* *.re*.xml *.xsd *.wsdl *.nsmap
-
