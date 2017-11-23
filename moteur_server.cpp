@@ -52,10 +52,10 @@ int ns__getWorkflowStatus(struct soap * soap, std::string workflowId, std::strin
   message+=workflowId;
   writeLog(message);
 
-  
+
   string command="cat /proc/*/cmdline > /tmp/tmpgrep ";
   system(command.c_str());
-  
+
   command = "grep ";
   command+=workflowId;
   command+="/workflow.xml /tmp/tmpgrep &>/dev/null" ;
@@ -63,7 +63,7 @@ int ns__getWorkflowStatus(struct soap * soap, std::string workflowId, std::strin
   writeLog(command.c_str());
 
   int  status = system(command.c_str());
-  
+
 
   system("rm -f /tmp/tmpgrep");
 
@@ -71,7 +71,7 @@ int ns__getWorkflowStatus(struct soap * soap, std::string workflowId, std::strin
     char s [126];
     sprintf(s, "[moteur_server] cannot get workflow status");
     writeLog(s);
-    return soap_sender_fault(soap, s, s);    
+    return soap_sender_fault(soap, s, s);
   }
   int r =  WEXITSTATUS(status);
   if(r == 0)
@@ -89,22 +89,22 @@ int ns__getWorkflowStatus(struct soap * soap, std::string workflowId, std::strin
       writeLog(command);
       int stat = system(command.c_str());
       if(stat == -1){
-	char s [126];
-	sprintf(s, "[moteur_server] cannot grep workflow status");
-	writeLog(s);
-	return soap_sender_fault(soap, s, s);    	  
+        char s [126];
+        sprintf(s, "[moteur_server] cannot grep workflow status");
+        writeLog(s);
+        return soap_sender_fault(soap, s, s);
       }
       int ret = WEXITSTATUS(stat);
       if(ret==0){
-	workflowStatus="COMPLETE";
+        workflowStatus="COMPLETE";
       }
       else
-	if(ret == 1)
-	  workflowStatus="TERMINATED";
-	else
-	  workflowStatus="UNKNOWN WORKFLOW";
+        if(ret == 1)
+          workflowStatus="TERMINATED";
+        else
+          workflowStatus="UNKNOWN WORKFLOW";
     }
-  
+
   writeLog("Status of workflow "+workflowId+" is "+workflowStatus);
   return SOAP_OK;
 }
@@ -148,7 +148,7 @@ int ns__workflowSubmit(struct soap * soap, std::string scuflDocument, std::strin
     }
   }
 
-  
+
   strcat(temp,"/workflow-XXXXXX");
   char * tempdir_c = mkdtemp(temp);
   if(tempdir_c == 0){
@@ -158,7 +158,7 @@ int ns__workflowSubmit(struct soap * soap, std::string scuflDocument, std::strin
     writeLog(s);
     return soap_sender_fault(soap, s, s);
   }
-  
+
   string tempdir = tempdir_c;
   writeLog("Dir "+tempdir+" created.");
   writeLog("Chmoding dir to 755.");
@@ -188,7 +188,7 @@ int ns__workflowSubmit(struct soap * soap, std::string scuflDocument, std::strin
   //WRITES THE FILES
   string dummy="";
   ofstream workflow((tempdir+"/workflow.xml").c_str(),ios::trunc);
-  if(workflow==NULL){
+  if(!workflow){
     char s [126];
     sprintf(s, "[moteur_server] Cannot write in dir %s",tempdir.c_str());
     writeLog(s);
@@ -199,7 +199,7 @@ int ns__workflowSubmit(struct soap * soap, std::string scuflDocument, std::strin
   writeLog("Workflow file successfully written");
 
   ofstream inputs((tempdir+"/inputs.xml").c_str(),ios::trunc);
-  if(inputs==NULL){
+  if(!inputs){
     char s [126];
     writeLog(s);
     sprintf(s, "Cannot write in dir %s",tempdir.c_str());
@@ -213,7 +213,7 @@ int ns__workflowSubmit(struct soap * soap, std::string scuflDocument, std::strin
 
 
   ofstream configFile(conffile.c_str(), ios::trunc);
-  if(configFile==NULL){
+  if(!configFile){
     char s [126];
     sprintf(s, "Cannot write in settings.conf");
     writeLog(s);
@@ -230,7 +230,7 @@ int ns__workflowSubmit(struct soap * soap, std::string scuflDocument, std::strin
   proxyfile+=basename(tempdir.c_str());
   proxyfile+="-proxy";
   ofstream proxy_file(proxyfile.c_str(),ios::trunc);
-  if(proxy_file==NULL){
+  if(!proxy_file){
     char s [126];
     sprintf(s, "Cannot write in file %s",proxyfile.c_str());
     writeLog(s);
