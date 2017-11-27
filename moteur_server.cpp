@@ -84,7 +84,7 @@ int ns__getWorkflowStatus(struct soap * soap, std::string workflowId, std::strin
       strcpy(temp,getenv("DOCUMENT_ROOT"));
       strcat(temp,"/workflows/");
       strcat(temp,workflowId.c_str());
-      strcat(temp,"/workflow.out");
+      strcat(temp,"/workflow.out &>/dev/null");
       command+=temp;
       writeLog(command);
       int stat = system(command.c_str());
