@@ -1,0 +1,11 @@
+*.log
+*.nsmap
+*.o
+*.req.xml
+*.res.xml
+*.wsdl
+*.xsd
+moteur_client
+moteur_client-status
+moteur_server
+soap*

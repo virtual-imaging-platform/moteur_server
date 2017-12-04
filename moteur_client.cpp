@@ -16,7 +16,7 @@ int main(int argc, char **argv) {
   string settings = "";
 
   ifstream wf((char *)workflow_file.c_str());
-  if(wf==NULL){
+  if(!wf){
     cerr<<"Cannot open file "<<workflow_file<<endl;
     exit(1);
   }
@@ -29,7 +29,7 @@ int main(int argc, char **argv) {
   wf.close();
 
   ifstream inp((char *) input_file.c_str());
-  if(inp == NULL)
+  if(!inp)
     {
       cerr<<"Cannot open file "<<input_file<<endl;
       exit(1);
@@ -47,7 +47,7 @@ int main(int argc, char **argv) {
       exit(1);
     }
   ifstream proxy(getenv("X509_USER_PROXY"));
-  if(proxy == NULL)
+  if(!proxy)
     {
       cerr<<"Cannot open file "<<getenv("X509_USER_PROXY")<<endl;
       exit(1);
@@ -68,14 +68,14 @@ int main(int argc, char **argv) {
 
   soap_ssl_init();
   if (soap_ssl_client_context(&soap,
-			      SOAP_SSL_SKIP_HOST_CHECK, NULL, NULL, NULL, NULL, NULL
-			      
-			      ))
+                              SOAP_SSL_SKIP_HOST_CHECK, NULL, NULL, NULL, NULL, NULL
+
+                              ))
     {
       soap_print_fault(&soap, stderr);
       exit(1);
-    } 
-  
+    }
+
 //  soap_init(&soap);
 
   string result;
