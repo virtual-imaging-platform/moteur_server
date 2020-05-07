@@ -43,7 +43,7 @@ int ns__killWorkflow(struct soap * soap, std::string workflowId){
   command+=workflowId;
   command+=" >> ./moteur_service.log";
   system(command.c_str());
-  return SOAP_OK;
+  return soap_send_empty_response(soap, 202); // HTTP 202 Accepted
 }
 
 int ns__getWorkflowStatus(struct soap * soap, std::string workflowId, std::string & workflowStatus)
