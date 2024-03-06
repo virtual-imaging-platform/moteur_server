@@ -22,9 +22,9 @@ do
 done
 
 
-cd ${MOTEUR_HOME}/worflow-agent-0.2
-log "Calling java -jar workflow-agent-0.2.jar kill ${DOCUMENT_ROOT}/workflows ${ID} 1>/tmp/workflowagent.out 2>/tmp/workflowagent.err &"
-java -jar workflow-agent-0.2.jar kill ${DOCUMENT_ROOT}/workflows ${ID} 1>/tmp/workflowagent.out 2>/tmp/workflowagent.err &
+cd ${MOTEUR_HOME}/workflow-agent
+log "Calling java -jar workflow-agent.jar kill ${DOCUMENT_ROOT}/workflows ${ID} 1>>./workflowagent.out 2>>./workflowagent.err &"
+java -jar workflow-agent.jar kill ${DOCUMENT_ROOT}/workflows ${ID} 1>>./workflowagent.out 2>>./workflowagent.err &
 
 \rm -f ${OUT}
 \rm -f ${ERR}
