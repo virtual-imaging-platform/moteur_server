@@ -52,20 +52,12 @@ int ns__getWorkflowStatus(struct soap * soap, std::string workflowId, std::strin
   message+=workflowId;
   writeLog(message);
 
-
-  string command="cat /proc/*/cmdline > /tmp/tmpgrep ";
-  system(command.c_str());
-
-  command = "grep ";
+  string command="ps -fu apache | grep ";
   command+=workflowId;
-  command+="/workflow.xml /tmp/tmpgrep &>/dev/null" ;
-
+  command+="/workflow.xml &>/dev/null" ;
   writeLog(command.c_str());
 
-  int  status = system(command.c_str());
-
-
-  system("rm -f /tmp/tmpgrep");
+  int status = system(command.c_str());
 
   if(status == -1){
     char s [126];
