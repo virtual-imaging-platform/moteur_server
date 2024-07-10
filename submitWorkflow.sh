@@ -8,9 +8,9 @@ function checkOverrideVal
       do
       currVal=`echo ${i} | awk -F'=' '{print $1}'`
       if [ ${currVal} == $1 ]
-	  then
-	  echo ${i} | awk -F'=' '{print $2}'
-	  break
+          then
+          echo ${i} | awk -F'=' '{print $2}'
+          break
       fi
     done
 }
@@ -122,16 +122,12 @@ rm ${GRIDCONF_BUFFER}
 cp ${INPUT_DOC} input-m2.xml
 
 # Loading jar dependencies in CLASSPATH
-export CLASSPATH=${MOTEUR_HOME}/moteur2.jar
+export CLASSPATH=${MOTEUR_HOME}/moteurlite.jar
 for i in `ls ${MOTEUR_HOME}/{libs,plugins}/*.jar`
-do 
+do
     export CLASSPATH=${CLASSPATH}:$i
 done
 
 # Launching workflow
-echo "---- LAUNCHING WORKFLOW: nohup nice -19 $JAVA_HOME/bin/java -Xmx950M  -XX:PermSize=512m -XX:-UseGCOverheadLimit -Duser.home=\"${HOME}/prod\" -DX509_USER_PROXY=${X509_USER_PROXY} fr.cnrs.i3s.moteur2.client.Main --config ${MOTEUR_HOME}/.moteur2 -ng -p `basename ${PWD}` ${WORKFLOW_DOC} ${INPUT_DOC} 1>./workflow.out 2>./workflow.err &"
-nohup nice -19 $JAVA_HOME/bin/java -Xmx950M  -XX:PermSize=512m -XX:-UseGCOverheadLimit -Duser.home="${HOME}/prod" -DX509_USER_PROXY=${X509_USER_PROXY} fr.cnrs.i3s.moteur2.client.Main --config ${MOTEUR_HOME}/.moteur2 -ng -p `basename ${PWD}` ${WORKFLOW_DOC} ${INPUT_DOC} 1>./workflow.out 2>./workflow.err &
-
-
-
-    
+echo "---- LAUNCHING WORKFLOW: nohup nice -19 $JAVA_HOME/bin/java -Xmx950M  -XX:PermSize=512m -XX:-UseGCOverheadLimit -Duser.home=\"${HOME}/prod\" -DX509_USER_PROXY=${X509_USER_PROXY} fr.insalyon.creatis.moteurlite.MoteurLite `basename ${PWD}` ${WORKFLOW_DOC} ${INPUT_DOC} 1>./workflow.out 2>./workflow.err &"
+nohup nice -19 $JAVA_HOME/bin/java -Xmx950M  -XX:PermSize=512m -XX:-UseGCOverheadLimit -Duser.home="${HOME}/prod" -DX509_USER_PROXY=${X509_USER_PROXY} fr.insalyon.creatis.moteurlite.MoteurLite `basename ${PWD}` ${WORKFLOW_DOC} ${INPUT_DOC} 1>./workflow.out 2>./workflow.err & echo ${WORKFLOW_DOC} ${INPUT_DOC}
