@@ -129,8 +129,8 @@ do
 done
 
 # Launching workflow
-echo "---- LAUNCHING WORKFLOW: nohup nice -19 $JAVA_HOME/bin/java -Xmx950M  -XX:PermSize=512m -XX:-UseGCOverheadLimit -Duser.home=\"${HOME}/prod\" -DX509_USER_PROXY=${X509_USER_PROXY} fr.cnrs.i3s.moteur2.client.Main --config ${MOTEUR_HOME}/.moteur2 -ng -p `basename ${PWD}` ${WORKFLOW_DOC} ${INPUT_DOC} 1>./workflow.out 2>./workflow.err &"
-nohup nice -19 $JAVA_HOME/bin/java -Xmx950M  -XX:PermSize=512m -XX:-UseGCOverheadLimit -Duser.home="${HOME}/prod" -DX509_USER_PROXY=${X509_USER_PROXY} fr.cnrs.i3s.moteur2.client.Main --config ${MOTEUR_HOME}/.moteur2 -ng -p `basename ${PWD}` ${WORKFLOW_DOC} ${INPUT_DOC} 1>./workflow.out 2>./workflow.err &
+echo "---- LAUNCHING WORKFLOW: nohup nice -19 $JAVA_HOME/bin/java -Xmx950M -XX:-UseGCOverheadLimit -Duser.home=\"${HOME}/prod\" -DX509_USER_PROXY=${X509_USER_PROXY} fr.cnrs.i3s.moteur2.client.Main --config ${MOTEUR_HOME}/.moteur2 -ng -p `basename ${PWD}` ${WORKFLOW_DOC} ${INPUT_DOC} 1>./workflow.out 2>./workflow.err &"
+nohup nice -19 $JAVA_HOME/bin/java -Xmx950M -XX:-UseGCOverheadLimit -Duser.home="${HOME}/prod" -DX509_USER_PROXY=${X509_USER_PROXY} fr.cnrs.i3s.moteur2.client.Main --config ${MOTEUR_HOME}/.moteur2 -ng -p `basename ${PWD}` ${WORKFLOW_DOC} ${INPUT_DOC} 1>./workflow.out 2>./workflow.err &
 
 
 
