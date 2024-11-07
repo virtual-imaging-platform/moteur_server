@@ -7,7 +7,7 @@
 using namespace std;
 
 void usage(){
-  cout<<"usage : moteur_client [server] [submit|status|kill] [workflowId|workflow.xml input.xml]"<<endl; exit(-1);
+  cout<<"usage : moteur_client [server] [submit|status|kill] [workflowId|workflow.json input.xml]"<<endl; exit(-1);
 }
 
 int main(int argc, char **argv) {

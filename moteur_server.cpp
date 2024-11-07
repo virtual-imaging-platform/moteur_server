@@ -54,7 +54,7 @@ int ns__getWorkflowStatus(struct soap * soap, std::string workflowId, std::strin
 
   string command="ps -fu apache | grep ";
   command+=workflowId;
-  command+="/workflow.xml &>/dev/null" ;
+  command+="/workflow.json &>/dev/null" ;
   writeLog(command.c_str());
 
   int status = system(command.c_str());
@@ -179,7 +179,7 @@ int ns__workflowSubmit(struct soap * soap, std::string scuflDocument, std::strin
   writeLog("Writing workflow and input files");
   //WRITES THE FILES
   string dummy="";
-  ofstream workflow((tempdir+"/workflow.xml").c_str(),ios::trunc);
+  ofstream workflow((tempdir+"/workflow.json").c_str(),ios::trunc);
   if(!workflow){
     char s [126];
     sprintf(s, "[moteur_server] Cannot write in dir %s",tempdir.c_str());
@@ -270,7 +270,7 @@ int ns__workflowSubmit(struct soap * soap, std::string scuflDocument, std::strin
   command+=proxyfile;
   command+=" ./submitWorkflow.sh  ";
   command+=tempdir;
-  command+="/workflow.xml ";
+  command+="/workflow.json ";
   command+=tempdir;
   command+="/inputs.xml ";
   command+=proxyfile;
