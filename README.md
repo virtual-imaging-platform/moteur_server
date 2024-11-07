@@ -2,7 +2,7 @@
 
 * Installation of development environment on CentOS
 
-  `sudo yum install gcc gcc-c++ flex bison libxml2-devel`
+  `sudo yum install gcc gcc-c++ flex bison libxml2-devel openssl-devel`
 
 * [gSOAP Toolkit](https://sourceforge.net/projects/gsoap2)
 
